@@ -5,6 +5,7 @@ resource "aws_cloudfront_origin_access_control" "site" {
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
+  
 }
 
 resource "aws_cloudfront_distribution" "site" {
@@ -12,6 +13,7 @@ resource "aws_cloudfront_distribution" "site" {
   is_ipv6_enabled     = true
   comment             = "Static site for ${var.bucket_name}"
   default_root_object = var.index_document
+  web_acl_id          = aws_wafv2_web_acl.sqli.arn 
 
   origin {
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
