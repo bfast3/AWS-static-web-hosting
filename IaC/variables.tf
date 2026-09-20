@@ -12,3 +12,8 @@ variable "index_document" {
   type    = string
   default = "index.html"
 }
+
+variable "aws_region" {
+  description = "This is the region used in the providers.tf file in which the AWS resources are deployed."
+  type        = string
+}
