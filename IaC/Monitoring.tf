@@ -38,7 +38,7 @@ resource "aws_cloudwatch_dashboard" "site" {
           title   = "S3 AllRequests"
           view    = "timeSeries"
           stacked = false
-          region  = data.aws_region.current.name
+          region  = data.aws_region.current.region
           period  = 300
           stat    = "Sum"
           metrics = [
