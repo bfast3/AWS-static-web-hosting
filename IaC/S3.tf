@@ -3,8 +3,6 @@ resource "aws_s3_bucket" "site" {
 }
 
 
-# All public access blocked. The bucket is only reachable through CloudFront,
-# via the OAC-scoped bucket policy defined in CloudFront.tf.
 resource "aws_s3_bucket_public_access_block" "site" {
   bucket = aws_s3_bucket.site.id
 
@@ -13,6 +11,13 @@ resource "aws_s3_bucket_public_access_block" "site" {
   block_public_policy     = true
   restrict_public_buckets = true
 }
+
+
+resource "aws_s3_bucket_metric" "site" {
+  bucket = aws_s3_bucket.site.id
+  name   = "EntireBucket"
+}
+
 
 # ################################################################################
 # # Upload assets from ../assets
